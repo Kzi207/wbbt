@@ -20,10 +20,19 @@ WORKDIR /app
 # Copy package files riêng để cache layer install
 COPY package*.json ./
 
-# npm install thẳng (không --ignore-scripts) để build scripts chạy đúng lúc.
-# PYTHON=python3 đảm bảo node-gyp dùng đúng binary ngay cả khi
-# python-is-python3 chưa kịp link trong PATH của npm subprocess.
-RUN PYTHON=python3 npm install 2>&1 | tail -50
+# Bước 1: Cài tất cả deps, bỏ qua install scripts để không bị lỗi abort sớm
+RUN PYTHON=python3 npm install --ignore-scripts
+
+# Bước 2: Rebuild riêng từng native addon — KHÔNG || true cho better-sqlite3
+# để build lỗi thật sự fail image (không chạy runtime với binary thiếu)
+RUN PYTHON=python3 npm rebuild better-sqlite3 --build-from-source
+RUN PYTHON=python3 npm rebuild sqlite3 --build-from-source || true
+RUN PYTHON=python3 npm rebuild canvas --build-from-source || true
+RUN PYTHON=python3 npm rebuild koffi || true
+RUN PYTHON=python3 npm rebuild deasync --build-from-source || true
+
+# Chạy postinstall scripts còn lại (không phải native addons)
+RUN PYTHON=python3 npm rebuild
 
 # Copy source code
 COPY . .
