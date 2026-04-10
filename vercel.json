@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "installCommand": "npm install express cors sequelize sqlite3 --legacy-peer-deps",
+  "builds": [
+    {
+      "src": "web/server/index.cjs",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "web/**",
+          "includes/**",
+          "data/**",
+          "languages/**",
+          "config.json",
+          "cookies.txt"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "web/server/index.cjs" }
+  ]
+}
