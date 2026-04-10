@@ -4,3 +4,10 @@ node_modules
 *.log
 npm-debug.log*
 Horizon_Database
+appstate.json
+cookies.txt
+cookies2.txt
+cookies*.txt
+FastConfigFca.json
+vercel.json
+.node-version

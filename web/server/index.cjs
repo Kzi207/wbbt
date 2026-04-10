@@ -656,28 +656,16 @@ app.get("/", (_req, res) => {
   res.sendFile(path.join(WEB_DIR, "index.html"));
 });
 
-const BASE_PORT = Number(process.env.PORT || 7070);
+const PORT = Number(process.env.PORT || 7070);
 
-function listenWithFallback(port) {
-  const server = app
-    .listen(port, () => {
-      console.log(`Web manager API running on http://localhost:${port}`);
-    })
-    .on("error", (err) => {
-      if (err && err.code === "EADDRINUSE") {
-        const nextPort = port + 1;
-        console.log(`Port ${port} dang duoc su dung, thu lai voi port ${nextPort}...`);
-        listenWithFallback(nextPort);
-        return;
-      }
-      console.error(err);
-      process.exit(1);
-    });
-
-  return server;
-}
-
-listenWithFallback(BASE_PORT);
+app
+  .listen(PORT, "0.0.0.0", () => {
+    console.log(`Web manager API running on http://0.0.0.0:${PORT}`);
+  })
+  .on("error", (err) => {
+    console.error("Failed to start server:", err);
+    process.exit(1);
+  });
 
 process.on("SIGINT", async () => {
   await killBotProcess();
