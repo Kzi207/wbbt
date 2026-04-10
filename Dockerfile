@@ -3,7 +3,7 @@ FROM node:22-bookworm-slim
 
 # Cài system libraries cần thiết cho native addons
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3 python-is-python3 make g++ git \
+    python3 make g++ git \
     libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev \
     libcups2 libnss3 libxss1 libasound2 libatk1.0-0 libatk-bridge2.0-0 \
     libgbm1 libgtk-3-0 libx11-xcb1 libxcomposite1 libxdamage1 libxrandr2 \
@@ -13,17 +13,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# npm config env vars — ép tất cả native packages build từ source,
-# không download prebuilt binary (tránh lỗi network hoặc binary sai arch).
-# npm_config_build_from_source áp dụng cả cho node-pre-gyp packages (better-sqlite3).
-ENV npm_config_build_from_source=true
-ENV npm_config_python=python3
-
 # Copy package files riêng để cache layer install
-COPY package*.json ./
+COPY package.json ./
 
-# Một lệnh install duy nhất — npm_config env vars đã ép build from source.
-# Không dùng --ignore-scripts vì better-sqlite3 cần script install của nó chạy.
+# Cài dependencies. Lần này không ép build-from-source để tận dụng 
+# prebuilt binaries của better-sqlite3 v11 (hỗ trợ tốt Node 22).
 RUN npm install
 
 # Copy source code
@@ -32,7 +26,7 @@ COPY . .
 # Tạo thư mục data mặc định để disk mount không lỗi lần đầu deploy
 RUN mkdir -p /app/data
 
-# Kiểm tra binary tồn tại ngay trong build — fail sớm nếu thiếu
+# Verify native addon works
 RUN node -e "require('better-sqlite3')" && echo "better-sqlite3 OK"
 
 # Port mặc định của Render Docker services

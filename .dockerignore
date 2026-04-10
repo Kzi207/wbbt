@@ -3,6 +3,7 @@ node_modules
 .gitignore
 *.log
 npm-debug.log*
+package-lock.json
 Horizon_Database
 appstate.json
 cookies.txt
