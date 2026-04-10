@@ -21,6 +21,7 @@ const models = require(path.join(ROOT, "includes", "database", "model.js"))(DB);
 const { sequelize } = DB;
 const Threads = models.use("Threads");
 const Users = models.use("Users");
+const { Op } = DB.Sequelize;
 
 
 const PATHS = {
@@ -351,6 +352,18 @@ app.post("/api/groups/:threadId/leave", async (req, res) => {
       }
     }
   } catch (_err) {}
+
+  // SQLite + BIGINT threadID (> 2^53) đôi khi không match đúng khi dùng where(threadID=...).
+  // Fallback chắc chắn: tìm row theo String(threadID) rồi xóa bằng khóa chính num.
+  try {
+    const candidates = await Threads.findAll({ attributes: ["num", "threadID"] });
+    const nums = candidates
+      .filter((r) => String(r.get("threadID")) === threadId)
+      .map((r) => r.get("num"));
+    if (nums.length) {
+      await Threads.destroy({ where: { num: { [Op.in]: nums } } });
+    }
+  } catch (_err2) {}
 
 
   const leaveList = readJson(PATHS.leaveThread, []);

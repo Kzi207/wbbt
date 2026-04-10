@@ -16,6 +16,9 @@
   },
   "author": "Cao.C.Đạt",
   "license": "GPL-3.0",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "@distube/ytdl-core": "^4.16.12",
     "@google/generative-ai": "^0.17.0",
@@ -91,7 +94,6 @@
   },
   "homepage": "https://github.com/chungdat02/Mirai-V2#readme",
   "keywords": [],
-  "devDependencies": {
-    "node": "^14.21.3"
-  }
+  "devDependencies": {}
+
 }
