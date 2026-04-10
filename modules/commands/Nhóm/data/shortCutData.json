@@ -1,0 +1,59 @@
+{
+    "6465798140163713": [
+        {
+            "short_type": {
+                "type": "tag",
+                "senderID": "100035421814099"
+            },
+            "output": "con cặc",
+            "url": "anime"
+        }
+    ],
+    "8201910669832758": [
+        {
+            "short_type": {
+                "type": "tag",
+                "senderID": "100035421814099"
+            },
+            "output": "xyz",
+            "url": "rd_girl"
+        },
+        {
+            "output": "chào em nha",
+            "short_type": {
+                "type": "autosend",
+                "loai": 1
+            },
+            "sendTime": "18:55:00",
+            "url": "🦴"
+        }
+    ],
+    "6878534095548019": [],
+    "25051623374452223": [
+        {
+            "short_type": {
+                "type": "join",
+                "senderID": "509484270"
+            },
+            "output": "chào {name} , bạn là thành viên thứ {soThanhVien} của nhóm {nameThread} người thêm là {authorName} \nthời gian: {time}",
+            "url": "rd_girl"
+        }
+    ],
+    "8635678413206032": [
+        {
+            "short_type": {
+                "type": "join",
+                "senderID": "509484270"
+            },
+            "output": "hi {name}",
+            "url": "rd_girl"
+        }
+    ],
+    "6620227634772011": [
+        {
+            "input": "g",
+            "output": "ok",
+            "url": "rd_girl"
+        }
+    ]
+}

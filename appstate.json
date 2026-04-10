@@ -1,0 +1,82 @@
+[
+  {
+    "key": "datr",
+    "value": "L4_MaZCr9pjuJhqhYGxhABKX",
+    "domain": ".facebook.com",
+    "path": "/",
+    "expires": "Sat, 10 Apr 2027 04:28:27 GMT",
+    "hostOnly": false
+  },
+  {
+    "key": "sb",
+    "value": "L4_Mad4Va8BEoQe03XxWu-lc",
+    "domain": ".facebook.com",
+    "path": "/",
+    "expires": "Sat, 10 Apr 2027 04:28:27 GMT",
+    "hostOnly": false
+  },
+  {
+    "key": "dpr",
+    "value": "1.25",
+    "domain": ".facebook.com",
+    "path": "/",
+    "expires": "Sat, 10 Apr 2027 04:28:27 GMT",
+    "hostOnly": false
+  },
+  {
+    "key": "ps_l",
+    "value": "1",
+    "domain": ".facebook.com",
+    "path": "/",
+    "expires": "Sat, 10 Apr 2027 04:28:27 GMT",
+    "hostOnly": false
+  },
+  {
+    "key": "ps_n",
+    "value": "1",
+    "domain": ".facebook.com",
+    "path": "/",
+    "expires": "Sat, 10 Apr 2027 04:28:27 GMT",
+    "hostOnly": false
+  },
+  {
+    "key": "c_user",
+    "value": "61553956530945",
+    "domain": ".facebook.com",
+    "path": "/",
+    "expires": "Sat, 10 Apr 2027 04:28:27 GMT",
+    "hostOnly": false
+  },
+  {
+    "key": "wd",
+    "value": "1536x730",
+    "domain": ".facebook.com",
+    "path": "/",
+    "expires": "Sat, 10 Apr 2027 04:28:27 GMT",
+    "hostOnly": false
+  },
+  {
+    "key": "presence",
+    "value": "C%7B%22t3%22%3A%5B%5D%2C%22utc3%22%3A1775790890176%2C%22v%22%3A1%7D",
+    "domain": ".facebook.com",
+    "path": "/",
+    "expires": "Sat, 10 Apr 2027 04:28:27 GMT",
+    "hostOnly": false
+  },
+  {
+    "key": "fr",
+    "value": "1zS0xtpCMzTp892aY.AWcNga2nPbtMiJzDZjRXFfx7-7mELSUkQ9S5oPkdFQfNWy3l98M.Bp2Gss..AAA.0.0.Bp2Gss.AWeBsthfC-PviR0NX2QfQmLYGKg",
+    "domain": ".facebook.com",
+    "path": "/",
+    "expires": "Sat, 10 Apr 2027 04:28:27 GMT",
+    "hostOnly": false
+  },
+  {
+    "key": "xs",
+    "value": "28%3A4NkIUjJtMowXXA%3A2%3A1775196690%3A-1%3A-1%3A%3AAcx8-DctgXa--Yk92N4iDfJwb5elBXLkyPHGRQtR6w",
+    "domain": ".facebook.com",
+    "path": "/",
+    "expires": "Sat, 10 Apr 2027 04:28:27 GMT",
+    "hostOnly": false
+  }
+]
