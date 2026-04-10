@@ -1,15 +1,15 @@
 services:
   - type: web
     name: bot-web-manager
-    runtime: docker
-    dockerfilePath: ./Dockerfile
+    runtime: node
+    rootDir: ./web
+    buildCommand: npm install
+    startCommand: node server/index.cjs
     plan: free
     envVars:
-      - key: PORT
-        value: 7070
-      - key: NODE_ENV
-        value: production
+      - key: NODE_VERSION
+        value: 20
     disk:
       name: bot-data
-      mountPath: /app/data
+      mountPath: /opt/render/project/src/data
       sizeGB: 1
