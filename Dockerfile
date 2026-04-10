@@ -3,11 +3,15 @@ FROM node:20-bookworm-slim
 
 # Cài system libraries cần thiết cho native addons
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3 make g++ git \
+    # Build tools — python-is-python3 để node-gyp tìm được 'python'
+    python3 python-is-python3 make g++ git \
+    # canvas (cairo, pango, jpeg, gif, librsvg)
     libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev \
+    # Chromium / Puppeteer headless
     libcups2 libnss3 libxss1 libasound2 libatk1.0-0 libatk-bridge2.0-0 \
     libgbm1 libgtk-3-0 libx11-xcb1 libxcomposite1 libxdamage1 libxrandr2 \
     libxext6 libxfixes3 libxi6 libxrender1 libxtst6 \
+    # Fonts & ssl
     fonts-noto-color-emoji ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
@@ -16,18 +20,15 @@ WORKDIR /app
 # Copy package files riêng để cache layer install
 COPY package*.json ./
 
-# Cài dependencies và rebuild native modules
-RUN npm install --ignore-scripts 2>&1 | tail -20 || true && \
-    npm rebuild better-sqlite3 --build-from-source 2>&1 | tail -5 || true && \
-    npm rebuild sqlite3 --build-from-source 2>&1 | tail -5 || true && \
-    npm rebuild canvas --build-from-source 2>&1 | tail -5 || true && \
-    npm rebuild koffi 2>&1 | tail -5 || true && \
-    npm rebuild deasync 2>&1 | tail -5 || true
+# npm install thẳng (không --ignore-scripts) để build scripts chạy đúng lúc.
+# PYTHON=python3 đảm bảo node-gyp dùng đúng binary ngay cả khi
+# python-is-python3 chưa kịp link trong PATH của npm subprocess.
+RUN PYTHON=python3 npm install 2>&1 | tail -50
 
 # Copy source code
 COPY . .
 
-# Tạo thư mục data mặc định để disk mount không bị lỗi khi lần đầu deploy
+# Tạo thư mục data mặc định để disk mount không lỗi lần đầu deploy
 RUN mkdir -p /app/data
 
 # Port mặc định của Render Docker services
