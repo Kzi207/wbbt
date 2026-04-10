@@ -1,5 +1,5 @@
-# Node 20 LTS chính thức
-FROM node:20-bookworm-slim
+# Node 22 LTS (Satisfies meta-messenger.js requirement >=22.12.0)
+FROM node:22-bookworm-slim
 
 # Cài system libraries cần thiết cho native addons
 RUN apt-get update && apt-get install -y --no-install-recommends \
