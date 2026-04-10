@@ -2,12 +2,14 @@ services:
   - type: web
     name: bot-web-manager
     runtime: node
-    buildCommand: cp web/package.json package.json && npm install
+    buildCommand: cd web && npm install
     startCommand: node web/server/index.cjs
     plan: free
     envVars:
       - key: NODE_VERSION
         value: 20
+      - key: NODE_PATH
+        value: /opt/render/project/src/web/node_modules
     disk:
       name: bot-data
       mountPath: /opt/render/project/src/data
